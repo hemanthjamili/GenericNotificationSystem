@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Generic Notification System</title>
+<!-- Loading Local files-->
+<!--Loading AngularJS dependencies-->
+<script type="text/javascript" src="bootstrap/angularjs/angular.min.js"></script>
+<script type="text/javascript" src="bootstrap/angularjs/angular-resource.js"></script>
+<!-- Loading JQuery Dependency-->
+<script type="text/javascript" src="bootstrap/js/jquery.js"></script>
+<!--Loading CSS dependencies-->
+<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" type="text/css">
+<link rel="stylesheet" href = "bootstrap/css/index.css" type="text/css">
+<!-- Latest compiled and minified JavaScript -->
+<script	src="bootstrap/js/bootstrap.min.js"></script>
+
+<!--Loading CSS, JS files from CDN. This step is Optional-->
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.3/angular.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.3/angular-resource.js"></script>
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<!-- Loading application angularjs files-->
+<script type="text/javascript" src="app/app.js"></script>
+<script type="text/javascript" src="app/notification.controller.js"></script>
+<script type="text/javascript" src="app/notification.service.js"></script>
+
+</head>
+<body ng-app="genericNotificationService" ng-controller="NotificationController">
+	<jh-alert ng-show="showAlert"></jh-alert>
+	<div class="panel panel-default">
+		<div class="panel-heading"><h3>Demonstration of a Generic Notification System</h3></div>
+		<div class="panel-body">
+			<form  class="col-md-4" ng-submit="saveNotification()">
+                <div class="form-group">
+					<label for="notificationFromAddress">From Address</label> <input required type="text"
+						ng-model="notification.fromAddress" class="form-control" id="notificationFromAddress"
+						placeholder="From Address">
+                </div>
+                <div class="form-group">
+					<label for="notificationToAddress">To Address</label> <input required type="text"
+						ng-model="notification.toAddress" class="form-control" id="notification.toAddress"
+						placeholder="To Address">
+                </div>
+                <div class="form-group">
+                    <label for="channelType">Channel Type</label>                     
+                    <select required
+                        class="form-control" 
+                        id="channelType" 
+                        ng-model="notification.channelType" >
+	                    <option value="Gmail">Gmail</option>
+	                    <option value="Slack">Slack</option>
+	                    <option value="Push">Push</option>
+                    </select>    
+                </div>
+				<div class="form-group">
+					<label for="notificationMessage">Message</label> 
+					<input required type="text"
+						ng-model="notification.message" class="form-control"
+						id="notificationMessage" placeholder="Message">
+				</div>
+
+				<button type="submit" class="btn btn-default">{{buttonText}}</button>
+				
+			</form>
+			<div class="table-responsive col-md-8">
+				<table class="table table-striped">
+					<tr>
+						<th>From Address</th>
+						<th>To Address</th>
+                        <th>Channel Type</th>
+                        <th>Message</th>
+						<th></th>
+					</tr>
+					<tr ng-repeat="notification in notifications">
+                        <td>{{notification.fromAddress}}</td>
+                        <td>{{notification.toAddress}}</td>
+						<td>{{notification.channelType}}</td>					
+						<td>{{notification.message}}</td>
+						<td>
+							<button type="button" class="btn btn-default"
+								ng-click="updateNotification(notification)">
+								<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+							</button>
+							<button type="button" class="btn btn-default"
+								ng-click="deleteNotification(notification)">
+								<span class="glyphicon glyphicon-remove-circle"
+									aria-hidden="true"></span>
+							</button>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+     <div class="panel-footer"><h4>This project is developed for Target Corporation</h4></div>
+    </div>
+
+</body>
+<footer></footer>
+
+</html>
